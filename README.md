@@ -21,7 +21,9 @@ A cycling equipment retailer with **18,484 customers** across **6 countries** ne
 
 ## 💡 Key Insights & Recommendations
 
-### 🚴‍♂️ Inventory Optimization: Capturing Missed Revenue in Peak Season
+---
+
+## 🚴‍♂️ 1. Inventory Optimization: Capturing Missed Revenue in Peak Season
 
 ### 📌 Discovered Business Problem
 The company is experiencing explosive growth (**214% YoY** revenue increase in Q4 2013), but inventory planning has not scaled to match. The best-selling products run out of stock during the critical holiday season.
@@ -44,7 +46,8 @@ By analyzing sales velocity vs. zero-sales days, I proved that while Q4 was a su
 
 💡**Recommendation:** Increasing safety stock by 20% can capture at least **$450,000** of this lost value next year.
 
-[Read more](docs/Inventory Optimization.md)
+
+##### ([Read more](docs/Inventory_Optimization.md))
 ---
 
 ### 🔍 Key Findings
