@@ -11,6 +11,8 @@ Description:  Calculates Inter-Purchase Time (IPT) to establish a data-driven
               churn threshold for durable goods.
 Logic:        Uses Window Functions (LAG) to measure the gap between orders 
               and calculates percentiles to find the "natural heartbeat."
+Key Finding:  The 75th percentile of repeat purchases occurs at ~522 days (17 months).
+              Strategy: Set Churn Threshold at 18 Months to avoid false positives.
 ===============================================================================
 */
 
