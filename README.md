@@ -65,7 +65,7 @@ The company suspected high churn among its customer base but lacked a precise de
 
 ---
 
-### **🌍 Critical Operational Insight (The "Blind Spot")**
+### **🌍 Critical Operational Insight**
 
 While analyzing the "Average Spender" churn group, I performed a geographic segmentation to rule out regional anomalies.
 
