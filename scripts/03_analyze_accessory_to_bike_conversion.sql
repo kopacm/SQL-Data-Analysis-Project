@@ -6,7 +6,7 @@ who started with an Accessory ever upgraded.
 This critical finding shifts strategy from "Acquisition" to "Retention."
 
 ===============================================================================
-Script:       analyze_accessory_to_bike_conversion.sql
+Script:       03_analyze_accessory_to_bike_conversion.sql
 Author:       Miroslav Kopáč
 Description:  Tests the "On-Ramp" Hypothesis: Do customers who start with 
               low-ticket items (Accessories/Clothing) upgrade to high-ticket 
