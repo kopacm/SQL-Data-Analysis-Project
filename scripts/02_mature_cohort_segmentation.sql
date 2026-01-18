@@ -7,8 +7,10 @@ revealing the true risk group.
 ===============================================================================
 Script:       02_mature_cohort_segmentation.sql
 Author:       Miroslav Kopáč
-Description:  Segments customers by spend and calculates the financial 
-              impact of churn using a "Mature Cohort" (12+ months tenure).
+Description:  Segments customers by spend and calculates churn rates.
+              Filters for customers who joined > 12 months ago to ensure
+              they have had enough time to churn.
+Key Finding:  VIPs have 0% Churn. The "Average Spender" segment is the highest risk.
 ===============================================================================
 */
 
