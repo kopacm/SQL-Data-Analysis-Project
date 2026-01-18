@@ -5,67 +5,86 @@
 [![Impact](https://img.shields.io/badge/Business_Impact-High-success)](https://github.com)
 [![Portfolio](https://img.shields.io/badge/Type-Professional_Portfolio-blue)](https://github.com)
 
----
+# **🚴 Optimizing Customer Retention: The "Bridge Strategy" Analysis**
 
-## 🎯 The Business Challenge
+### **Executive Summary**
 
-A cycling equipment retailer with **18,484 customers** across **6 countries** needed to answer critical questions:
-- **Why is revenue declining** in certain product categories?
-- **Which customers** should we prioritize for retention campaigns?
-- **What products** should we discontinue or double-down on?
-- **When** should we ramp up inventory for peak demand?
+In this SQL-based analysis, I investigated a churn problem for a bicycle retailer. By moving beyond standard churn reporting, I uncovered a **$907,006 revenue leak** driven by "One-and-Done" buyers. The analysis showed that a popular acquisition hypothesis was wrong ("The On-Ramp") and identified a specific cross-selling behavior ("The Bridge") that increases customer retention by **1.57x**.
 
-**My Role:** Analyze 4 years of sales data to uncover actionable insights and create automated reporting for ongoing decision-making.
+* **Role:** Lead Data Analyst  
+* **Tools:** SQL (Window Functions, CTEs, Segmentations), Data Visualization  
+* **Impact:** Identified a $907k opportunity and pivoted marketing strategy from Acquisition to Retention.
 
 ---
 
-## 💡 Key Insights & Recommendations
+## **📉 The Business Problem**
+
+The company suspected high churn among its customer base but lacked a precise definition of "churn" for durable goods (bicycles). Marketing was planning a campaign to acquire new customers via low-cost items (Accessories) to fix this.
+
+**My Goal:** Determine the *true* churn rate, identify the root cause, and validate the proposed marketing strategy.
 
 ---
 
-## 🚴‍♂️ 1. Inventory Optimization: Capturing Missed Revenue in Peak Season
+## **🕵️‍♂️ The Analysis: A 4-Step Story"**
 
-### 📌 Discovered Business Problem
-The company is experiencing explosive growth (**214% YoY** revenue increase in Q4 2013), but inventory planning has not scaled to match. The best-selling products run out of stock during the critical holiday season.
+### **Step 1: Establishing the Baseline (Defining Churn)**
 
-**The Goal:** Quantify the "Opportunity Cost" of these stockouts and build a data-driven purchasing plan to capture missed revenue next season.
+* **The Challenge:** Bicycles are not monthly subscriptions. A 3-month silence isn't churn; it's normal.  
+* **The Analysis:** I performed an Inter-Purchase Time (IPT) analysis using SQL Window Functions (LAG) to calculate the natural "heartbeat" of the customer base.  
+* **The Finding:** The 75th percentile of repeat purchases occurs at **522 days (approx. 17 months)**.  
+* **Decision:** I set the Churn Threshold at **18 months** to avoid false positives.
 
----
+### **Step 2: Diagnosing the Patient (Who is leaving?)**
 
-### 📊  Summary of findings
-My analysis identified a **$897,000 revenue gap** caused by stockouts on the company's Top 10 products. 
+* **The Challenge:** New customers often look "active" simply because they joined recently.  
+* **The Analysis:** I filtered for a "Mature Cohort" (tenure \> 12 months) and segmented customers by Monetary Value (Quartiles).  
+* **The Finding:**  
+  * **VIPs (Top Spenders):** 0% Churn.  
+  * **The Leak:** The "Average Spender" segment (Quartile 2\) had the highest churn rate.  
+  * **Revenue Impact:** These 255 churned customers represented a **$907k loss** in Lifetime Value.
 
-By analyzing sales velocity vs. zero-sales days, I proved that while Q4 was a success ($5.3M Revenue), company lost ~15% of potential revenue because key items were physically unavailable during peak shopping days.
+### **Step 3: The Strategic Pivot (Busting the "On-Ramp" Myth)**
 
-| Metric | Insight |
-| :--- | :--- |
-| **Growth Surge** | Q4 Revenue tripled (+214%) vs previous year. |
-| **Operational Gap** | Inventory planning remained flat, leading to critical shortages. |
-| **Missed Opportunity** | **~$897k** in estimated uncaptured demand. |
+* **The Hypothesis:** Management believed selling Accessories (helmets, jerseys) to new customers would act as an "On-Ramp" to buying Bicycles later.  
+* **The Analysis:** I tracked 9,350 customers who started their journey with an Accessory purchase.  
+* **The Finding:** **0.00%** of these customers upgraded to a bike.  
+* **The Pivot:** I recommended **stopping** ad spend on this acquisition strategy immediately.
 
+### **Step 4: The Solution (The "Bridge" Strategy)**
 
-💡**Recommendation:** Increasing safety stock by 20% can capture at least **$450,000** of this lost value next year.
-
-
-##### ([Read more](docs/Inventory_Optimization.md))
----
-
-### 🔍 Key Findings
-
-**1. Seasonality is Drastic**
-Demand for the "Bikes" category spikes. Q4 sales alone account for a massive portion of the yearly revenue.
-
-**2. The "Stockout" Pattern**
-Despite high store traffic, the **Top 10 Best-Selling Products** frequently registered **Zero Sales** on high-traffic days. 
-* This wasn't due to lack of demand (store traffic was high).
-* It was due to availability: The most popular bikes were sold out.
-
-**3. The Financial Impact**
-Using analysis where I counted stockouts only when a product was active, I calculated the specific lost value for the Top 10 SKUs:
-* **Realized Revenue:** $1.8M (Top 10 Products)
-* **Missed Revenue:** $897k (Estimated)
-* **Recommendation:** Increasing safety stock by 20% can capture at least **$450,000** of this lost value next year.
+* **The Hypothesis:** If Accessories don't work for *Acquisition*, do they work for *Retention*?  
+* **The Analysis:** I compared the repurchase rates of "Pure Bike" buyers vs. "Mixed Basket" buyers (Bike \+ Accessory).  
+* **The Finding:**  
+  * **Pure Bike Buyers:** 37% Repurchase Rate.  
+  * **Mixed Basket Buyers:** 58% Repurchase Rate.  
+  * **Insight:** Getting a bike owner to buy a "Bridge Item" (Accessory) increases their likelihood of buying a second bike by **1.57x**.
 
 ---
 
-### 🛠️ The Analysis (SQL Code)
+## **🌍 Critical Operational Insight (The "Blind Spot")**
+
+While analyzing the "Average Spender" churn group, I performed a geographic segmentation to rule out regional anomalies.
+
+* **The Discovery:** **74% of the lost revenue** came specifically from the **United States** market.  
+* **The Context:** The US accounts for only 25% of the active user base.  
+* **Recommendation:** This disproportionate churn suggests an **Operational/Logistics failure** in the US region (maybe shipping delays), rather than a purely product-based failure.
+
+---
+
+## **💡 Recommendations**
+
+Based on this analysis, I presented three strategic recommendations to the executive team:
+
+1. **Launch "The Bridge Program":** Shift marketing budget from "On-Ramp" acquisition (which failed) to cross-selling Accessories to the **1,455 active "Pure Bike" customers**.  
+2. **Stop "On-Ramp" Spend:** Cease acquisition campaigns targeting low-value Accessory buyers, as they have a 0% conversion rate to high-value items.  
+3. **US Operations Audit:** Pause aggressive scaling in the US until a "Voice of Customer" survey confirms if logistics/shipping issues are driving the 74% revenue bleed in that region.
+
+---
+
+## **🛠️ Technical Skills Demonstrated**
+
+* **Advanced SQL:** CTEs, Window Functions (LAG, NTILE, SUM OVER), Date Math (DATEDIFF), Segementation logic.  
+* **Business Logic:** Cohort Analysis, Churn Definition, Lifetime Value (LTV) Calculation.  
+* **Strategic Thinking:** Hypothesis testing (Acquisition vs. Retention) and Geographic anomaly detection.
+---
+*Check out the SQL folder in this repository to see the foundational scripts used to generate these insights.*
